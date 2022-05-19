@@ -1,5 +1,18 @@
+image: gradle:7.4.2-jdk17
+
+stages:
+  - deploy
+
+variables:
+  GRADLE_USER_HOME: '.gradle'
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
 deploy:
-  image: gradle:7.4.2-jdk17
+  stage: deploy
   script:
     - 'gradle publish'
   only:
