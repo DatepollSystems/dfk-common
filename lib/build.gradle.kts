@@ -14,7 +14,7 @@ plugins {
     kotlin("plugin.serialization") version "1.6.10"
 }
 
-version = "0.0.1"
+version = "0.0.2"
 java.sourceCompatibility = JavaVersion.VERSION_17
 group = "org.datepollsystems.dfk-common"
 
