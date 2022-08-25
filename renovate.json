@@ -1,0 +1,28 @@
+{
+  "pinVersions": true,
+  "semanticCommits": "enabled",
+  "separateMajorMinor": false,
+  "baseBranches": ["develop"],
+  "assignees": ["Dafnik"],
+  "semanticPrefix": "deps",
+  "labels": ["dependencies"],
+  "schedule": ["after 10pm every weekday", "before 4am every weekday", "every weekend"],
+  "timezone": "Europe/Vienna",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "minor-updates"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "groupName": "major-risky-update"
+    }
+  ],
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges",
+    ":dependencyDashboard",
+    ":rebaseStalePrs",
+    ":enableVulnerabilityAlertsWithLabel('security')"
+  ]
+}
