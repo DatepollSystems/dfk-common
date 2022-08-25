@@ -11,14 +11,11 @@ abstract class AEntitySessionService<
         entityType : IAuthEntity,
         sessionType : AEntitySession<entityType>>
     (val entitySessionRepository: IEntitySessionRepository<entityType, sessionType>) :
-    AEntityService<sessionType>(entitySessionRepository) {
+    AEntityWithLongIdService<sessionType>(entitySessionRepository) {
 
     fun getByToken(token: String) = entitySessionRepository.findByToken(token) ?: throw SessionTokenIncorrectException()
 
     fun getByEntityId(entityId: Long) = entitySessionRepository.findByEntityId(entityId)
-
-    fun getByUpdatedDateTimeBefore(updatedDateTime: Date) =
-        entitySessionRepository.findByUpdatedDateTimeBefore(updatedDateTime)
 
     fun existsByToken(token: String) = entitySessionRepository.existsByToken(token)
 
@@ -42,5 +39,11 @@ abstract class AEntitySessionService<
         entity.description = description
         entity.touch()
         return entitySessionRepository.save(entity)
+    }
+
+    fun clearSessionsOlderThan(past: Date): List<sessionType> {
+        val sessions = entitySessionRepository.findByUpdatedDateTimeBefore(past)
+        this.deleteAll(sessions)
+        return sessions
     }
 }

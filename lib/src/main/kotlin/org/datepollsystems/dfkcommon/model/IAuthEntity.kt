@@ -1,22 +1,13 @@
 package org.datepollsystems.dfkcommon.model
 
-import com.fasterxml.jackson.annotation.JsonProperty
-import java.util.*
-
-interface IAuthEntity : IEntity {
+interface IAuthEntity : IEntityWithLongId {
     val authIdentifier: String
 }
 
-interface IEntitySession<T : IAuthEntity> : IEntity {
+interface IEntitySession<T : IAuthEntity> : IEntityWithLongId {
     val token: String
     var description: String
     var entity: T
-
-    @JsonProperty("createdAt")
-    fun getCreateField(): Date? = createdAt
-
-    @JsonProperty("updatedAt")
-    fun getUpdateFiled(): Date? = updatedAt
 }
 
 interface IAuthActivatableEntity : IAuthEntity {

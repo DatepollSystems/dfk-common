@@ -3,31 +3,21 @@ package org.datepollsystems.dfkcommon.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import org.hibernate.Hibernate
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
+import java.io.Serializable
 import java.util.*
 import javax.persistence.*
 
 @JsonPropertyOrder("id")
 @MappedSuperclass
-abstract class AEntity : IEntity {
+abstract class AEntityWithLongId : AEntity<Long>(), IEntityWithLongId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Persisting should work nonetheless
     override var id: Long = -1
+}
 
-    @JsonIgnore
-    @Column(name = "created_at")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    override val createdAt: Date? = null
-
-    @JsonIgnore
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    override var updatedAt: Date? = null
-
+@JsonPropertyOrder("id")
+@MappedSuperclass
+abstract class AEntity<ID : Serializable> : ATimestamps(), IEntity<ID> {
     @JsonIgnore
     @Version
     override var version: Long = 0
@@ -39,7 +29,7 @@ abstract class AEntity : IEntity {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as AEntity
+        other as IEntity<*>
 
         return id == other.id
     }
@@ -54,18 +44,4 @@ abstract class AEntity : IEntity {
     override fun toString(): String {
         return """Id: "$id""""
     }
-}
-
-abstract class ATimestamps : ITimestamp {
-    @JsonIgnore
-    @Column(name = "created_at")
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    override val createdAt: Date? = null
-
-    @JsonIgnore
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    override var updatedAt: Date? = null
 }

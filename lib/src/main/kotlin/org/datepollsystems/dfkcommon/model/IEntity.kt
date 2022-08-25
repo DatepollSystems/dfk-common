@@ -1,20 +1,15 @@
 package org.datepollsystems.dfkcommon.model
 
-import java.util.*
+interface IEntityWithLongId : IEntity<Long>
 
-interface IEntity : ITimestamp {
-    var id: Long
+interface IEntity<ID: Any> : ITimestamps {
+    var id: ID
     var version: Long
     override fun hashCode(): Int
     override fun equals(other: Any?): Boolean
     fun touch()
 }
 
-interface ITimestamp {
-    val createdAt: Date?
-    var updatedAt: Date?
-}
-
-interface IEntityWithName : IEntity {
+interface IEntityWithName : IEntityWithLongId {
     var name: String
 }

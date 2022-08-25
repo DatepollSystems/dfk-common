@@ -1,12 +1,13 @@
 package org.datepollsystems.dfkcommon.dto
 
 import org.datepollsystems.dfkcommon.model.IEntity
+import org.datepollsystems.dfkcommon.model.IEntityWithLongId
 import org.datepollsystems.dfkcommon.model.IEntityWithName
 
 data class IdResponse(
     var id: Long
 ) {
-    constructor(entity: IEntity) : this(entity.id)
+    constructor(entity: IEntityWithLongId) : this(entity.id)
 }
 
 data class IdAndNameResponse(
