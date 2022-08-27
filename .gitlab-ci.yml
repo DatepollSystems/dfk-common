@@ -1,32 +1,35 @@
-image: gradle:7.4.2-jdk17
+include:
+    -   template: Jobs/SAST.gitlab-ci.yml
+    -   template: Security/Secret-Detection.gitlab-ci.yml
 
 stages:
-  - test
-  - deploy
-
-variables:
-  GRADLE_USER_HOME: '.gradle'
+    - test
+    - deploy
 
 cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
+    paths:
+        - .gradle
+        - build
+
+image: openjdk:17-jdk-slim
 
 test:
-  stage: test
-  script:
-    - 'gradle build'
-  only:
-    - branches
-  except:
-    - main
+    stage: test
+    script:
+        - ./gradlew -v
+        - ./gradlew build
+    only:
+        - branches
+    except:
+        - main
 
 deploy:
-  stage: deploy
-  script:
-    - 'gradle publish'
-  only:
-    - tags
-  except:
-    - branches
-    - triggers
+    stage: deploy
+    script:
+        - ./gradlew -v
+        - ./gradlew publish
+    only:
+        - tags
+    except:
+        - branches
+        - triggers
