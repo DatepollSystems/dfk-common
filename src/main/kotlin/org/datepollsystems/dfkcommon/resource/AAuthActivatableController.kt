@@ -7,7 +7,6 @@ import org.datepollsystems.dfkcommon.model.IAuthActivatableEntity
 import org.datepollsystems.dfkcommon.service.AEntityAuthService
 import org.datepollsystems.dfkcommon.service.AEntitySessionService
 
-
 abstract class AAuthActivatableController<ENTITYTYPE : IAuthActivatableEntity, SESSIONTYPE : AEntitySession<ENTITYTYPE>>(
     entityAuthService: AEntityAuthService<ENTITYTYPE>,
     entitySessionService: AEntitySessionService<ENTITYTYPE, SESSIONTYPE>,

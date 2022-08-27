@@ -1,7 +1,6 @@
 package org.datepollsystems.dfkcommon.domain
 
 import org.datepollsystems.dfkcommon.exceptions.NotFoundException
-import org.datepollsystems.dfkcommon.model.IEntity
 import org.datepollsystems.dfkcommon.model.IEntityWithLongId
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean

@@ -14,6 +14,6 @@ abstract class AEntitySession<T : IAuthEntity>(
     @JoinColumn(name = "entity_id", nullable = false)
     override var entity: T,
 
-    ) : AEntityWithLongId(), IEntitySession<T> {
+) : AEntityWithLongId(), IEntitySession<T> {
     override fun toString(): String = "Id: '$id', Description: '$description', Entity: '${entity.id}'"
 }

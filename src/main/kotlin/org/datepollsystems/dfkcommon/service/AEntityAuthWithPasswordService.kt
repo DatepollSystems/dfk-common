@@ -5,7 +5,7 @@ import org.datepollsystems.dfkcommon.model.IAuthPasswordEntity
 import org.springframework.data.jpa.repository.JpaRepository
 
 abstract class AEntityAuthWithPasswordService<entityType : IAuthPasswordEntity>
-    (private val authEntityRepository: JpaRepository<entityType, Long>) :
+(private val authEntityRepository: JpaRepository<entityType, Long>) :
     AEntityAuthService<entityType>(authEntityRepository) {
 
     abstract fun updateCredentials(entity: entityType, credentials: String)

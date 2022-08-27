@@ -1,6 +1,5 @@
 package org.datepollsystems.dfkcommon.dto
 
-import org.datepollsystems.dfkcommon.model.IEntity
 import org.datepollsystems.dfkcommon.model.IEntityWithLongId
 import org.datepollsystems.dfkcommon.model.IEntityWithName
 

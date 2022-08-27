@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.security.core.Authentication
 
 abstract class AEntityAuthService<entityType : IAuthEntity>
-    (private val authEntityRepository: JpaRepository<entityType, Long>) :
+(private val authEntityRepository: JpaRepository<entityType, Long>) :
     AEntityWithLongIdService<entityType>(authEntityRepository) {
 
     abstract fun getByAuthIdentifier(identifier: String): entityType?

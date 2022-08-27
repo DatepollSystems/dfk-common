@@ -8,9 +8,9 @@ import org.datepollsystems.dfkcommon.util.RandomGenerator
 import java.util.*
 
 abstract class AEntitySessionService<
-        entityType : IAuthEntity,
-        sessionType : AEntitySession<entityType>>
-    (val entitySessionRepository: IEntitySessionRepository<entityType, sessionType>) :
+    entityType : IAuthEntity,
+    sessionType : AEntitySession<entityType>>
+(val entitySessionRepository: IEntitySessionRepository<entityType, sessionType>) :
     AEntityWithLongIdService<sessionType>(entitySessionRepository) {
 
     fun getByToken(token: String) = entitySessionRepository.findByToken(token) ?: throw SessionTokenIncorrectException()
