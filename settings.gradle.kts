@@ -1,2 +1,2 @@
 rootProject.name = "dfk-common"
-include("lib")
+include("src")

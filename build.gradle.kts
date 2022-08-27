@@ -12,6 +12,8 @@ plugins {
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
     kotlin("plugin.serialization") version "1.6.10"
+
+    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 version = "0.0.2"
@@ -20,6 +22,7 @@ group = "org.datepollsystems.dfk-common"
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 // Because we do not apply the spring boot plugin, we have to tell all spring dependencies which version to use
@@ -30,14 +33,12 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-websocket")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -86,3 +87,6 @@ publishing {
         }
     }
 }
+
+// Install ktlint format pre-commit hook
+tasks.getByPath(":prepareKotlinBuildScriptModel").dependsOn(":addKtlintFormatGitPreCommitHook")
