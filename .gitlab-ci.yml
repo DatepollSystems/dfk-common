@@ -1,6 +1,7 @@
 image: gradle:7.4.2-jdk17
 
 stages:
+  - test
   - deploy
 
 variables:
@@ -10,6 +11,15 @@ cache:
   paths:
     - .gradle/wrapper
     - .gradle/caches
+
+test:
+  stage: test
+  script:
+    - 'gradle build'
+  only:
+    - branches
+  except:
+    - main
 
 deploy:
   stage: deploy
